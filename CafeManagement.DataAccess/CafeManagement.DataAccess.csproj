@@ -18,8 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CafeManagement.Models\CafeManagement.Models.csproj" />
-    <ProjectReference Include="..\CafeManagement.Utilities\CafeManagement.Utilities.csproj" />
-    <ProjectReference Include="..\CafeManagement.ViewModels\CafeManagement.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
