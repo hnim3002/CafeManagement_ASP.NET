@@ -17,7 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CafeManagement.Models\CafeManagement.Models.csproj" />
+	<ProjectReference Include="..\CafeManagement.DataAccess\CafeManagement.DataAccess.csproj" />
+	<ProjectReference Include="..\CafeManagement.Models\CafeManagement.Models.csproj" />
   </ItemGroup>
 
 </Project>
