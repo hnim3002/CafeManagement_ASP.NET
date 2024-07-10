@@ -25,6 +25,8 @@ namespace CafeManagement.Models.Entities
         public Cafe Cafe { get; set; }
 
         public ICollection<Receipt> Receipts { get; set; }
+
+        public ICollection<WorkSchedules> WorkSchedules { get; set; }
     }
 }
 
