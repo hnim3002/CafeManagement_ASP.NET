@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
 using CafeManagement.DataAccess.Data;
+using CafeManagement.Models.Entities;
+using Microsoft.Identity.Client;
 
 namespace CafeManagement.Utilities
 {
@@ -43,21 +45,34 @@ namespace CafeManagement.Utilities
             { 
                 _roleManager.CreateAsync(new IdentityRole(WebRoles.Web_Admin)).GetAwaiter().GetResult(); 
                 _roleManager.CreateAsync(new IdentityRole(WebRoles.Web_Manager)).GetAwaiter().GetResult(); 
-                _roleManager.CreateAsync(new IdentityRole(WebRoles.Web_Staff)).GetAwaiter().GetResult(); 
+                _roleManager.CreateAsync(new IdentityRole(WebRoles.Web_Staff)).GetAwaiter().GetResult();
 
-                _userManager.CreateAsync(new IdentityUser
+
+                var cafeId = _db.Cafes.FirstOrDefault().Id;
+               
+
+                var user = new ApplicationUser
                 {
                     UserName = "Mink",
-                    Email = "Mink@gmail.com"
-                },"Mink@123").GetAwaiter().GetResult();
+                    Email = "Mink@gmail.com",
+                    CafeId = cafeId,
 
-                var Appuser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "Mink@gmail.com");
-                if(Appuser != null)
+                    // Initialize other properties if needed
+                };
+
+                var result = _userManager.CreateAsync(user, "Mink@123").GetAwaiter().GetResult();
+
+                if (result.Succeeded)
                 {
-                    _userManager.AddToRoleAsync(Appuser, WebRoles.Web_Admin).GetAwaiter().GetResult();
+                    var appUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "Mink@gmail.com");
+                    if (appUser != null)
+                    {
+                        _userManager.AddToRoleAsync(appUser, WebRoles.Web_Admin).GetAwaiter().GetResult();
+                    }
                 }
             }
         }
+
     
     }
 }

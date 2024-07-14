@@ -8,6 +8,8 @@ namespace CafeManagement.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {
-        Task SaveAync();
+        ICafeRepository Cafe {  get; }
+    
+        Task SaveAsync();
     }
 }

@@ -19,7 +19,7 @@ namespace CafeManagement.DataAccess.Repository
             _db = db;
             Cafe = new CafeRepository(_db);
         }
-        public async Task SaveAync()
+        public async Task SaveAsync()
         {
             await _db.SaveChangesAsync();
         }
