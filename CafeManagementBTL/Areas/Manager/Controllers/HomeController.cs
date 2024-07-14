@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CafeManagement.Web.Areas.Staff.Controllers
+namespace CafeManagement.Web.Areas.Manager.Controllers
 {
-    [Area("Staff")]
-    [Authorize(Roles = "Staff")]
-    public class StaffController : Controller
+    [Area("Manager")]
+    [Authorize(Roles = "Manager")]
+    public class HomeController : Controller
     {
-        
         public IActionResult Index()
         {
             return View();

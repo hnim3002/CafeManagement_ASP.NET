@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CafeManagement.Models.ViewModel
 {
-    public class AuthVM
+    public class LoginVM
     {
         [Required]
         public string UserName { get; set; }
