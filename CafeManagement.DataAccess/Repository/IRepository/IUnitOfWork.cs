@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace CafeManagement.DataAccess.Repository.IRepository
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
-        Task SaveAync();
+        ICafeRepository Cafe {  get; }
+    
+        Task SaveAsync();
     }
 }

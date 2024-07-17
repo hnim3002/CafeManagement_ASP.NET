@@ -8,17 +8,20 @@ using System.Threading.Tasks;
 
 namespace CafeManagement.DataAccess.Repository
 {
-    internal class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _db;
+
+        public ICafeRepository Cafe { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
+            Cafe = new CafeRepository(_db);
         }
-        public Task SaveAync()
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await _db.SaveChangesAsync();
         }
     }
 }

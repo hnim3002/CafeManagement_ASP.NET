@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeManagement.Web", "CafeManagement.Web.csproj", "{DD951FD6-591E-49BA-8480-6309BEE14C41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CafeManagement.Web", "CafeManagement.Web.csproj", "{DD951FD6-591E-49BA-8480-6309BEE14C41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeManagement.Models", "..\CafeManagement.Models\CafeManagement.Models.csproj", "{3842F6C2-FD37-4112-BE5F-2C6E72153F51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CafeManagement.Models", "..\CafeManagement.Models\CafeManagement.Models.csproj", "{3842F6C2-FD37-4112-BE5F-2C6E72153F51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeManagement.DataAccess", "..\CafeManagement.DataAccess\CafeManagement.DataAccess.csproj", "{7211D6AA-B1F5-48D7-8AD7-AA85DC8329D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CafeManagement.DataAccess", "..\CafeManagement.DataAccess\CafeManagement.DataAccess.csproj", "{7211D6AA-B1F5-48D7-8AD7-AA85DC8329D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeManagement.Utilities", "..\CafeManagement.Utilities\CafeManagement.Utilities.csproj", "{6CE5592C-91B6-49FB-869A-F779764B9DC7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeManagement.ViewModels", "..\CafeManagement.ViewModels\CafeManagement.ViewModels.csproj", "{8A26EAC7-F4DA-4E35-9BCF-252E8819068E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CafeManagement.Utilities", "..\CafeManagement.Utilities\CafeManagement.Utilities.csproj", "{6CE5592C-91B6-49FB-869A-F779764B9DC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{6CE5592C-91B6-49FB-869A-F779764B9DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CE5592C-91B6-49FB-869A-F779764B9DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CE5592C-91B6-49FB-869A-F779764B9DC7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A26EAC7-F4DA-4E35-9BCF-252E8819068E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A26EAC7-F4DA-4E35-9BCF-252E8819068E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A26EAC7-F4DA-4E35-9BCF-252E8819068E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A26EAC7-F4DA-4E35-9BCF-252E8819068E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

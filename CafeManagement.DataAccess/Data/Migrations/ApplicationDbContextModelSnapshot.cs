@@ -17,7 +17,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.5")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -39,6 +39,14 @@ namespace CafeManagement.DataAccess.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cafes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b6c2cd49-5e4a-480f-8a6d-95de0104bde9"),
+                            Address = "96 Dinh cong",
+                            Name = "CafeM1"
+                        });
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.Category", b =>
@@ -346,7 +354,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.ToTable("AspNetUsers", (string)null);
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+                    b.HasDiscriminator().HasValue("IdentityUser");
 
                     b.UseTphMappingStrategy();
                 });
@@ -379,12 +387,10 @@ namespace CafeManagement.DataAccess.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -421,12 +427,10 @@ namespace CafeManagement.DataAccess.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -547,7 +551,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("CafeManagement.Models.Entities.ApplicationUser", "Employee")
-                        .WithMany()
+                        .WithMany("WorkSchedules")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -643,6 +647,8 @@ namespace CafeManagement.DataAccess.Data.Migrations
             modelBuilder.Entity("CafeManagement.Models.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("Receipts");
+
+                    b.Navigation("WorkSchedules");
                 });
 #pragma warning restore 612, 618
         }

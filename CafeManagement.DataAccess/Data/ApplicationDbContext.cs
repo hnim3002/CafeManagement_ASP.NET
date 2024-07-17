@@ -23,6 +23,10 @@ namespace CafeManagement.DataAccess.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Cafe>().HasData(new Cafe {Id= Guid.NewGuid(),  Name = "CafeM1", Address = "96 Dinh cong", });
+
+
             base.OnModelCreating(modelBuilder);
 
             // Configure composite primary key for Inventory

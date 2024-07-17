@@ -20,4 +20,9 @@
     <ProjectReference Include="..\CafeManagement.Models\CafeManagement.Models.csproj" />
   </ItemGroup>
 
+	    
+
+	
+	        
+
 </Project>
