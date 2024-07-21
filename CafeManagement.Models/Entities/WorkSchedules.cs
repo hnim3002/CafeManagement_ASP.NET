@@ -24,7 +24,6 @@ namespace CafeManagement.Models.Entities
         public string EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
         public ApplicationUser Employee { get; set; }
-
         public Guid CafeId { get; set; }
         [ForeignKey("CafeId")]
         public Cafe Cafe { get; set; }
