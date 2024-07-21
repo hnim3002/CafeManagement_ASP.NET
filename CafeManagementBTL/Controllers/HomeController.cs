@@ -1,10 +1,12 @@
 using CafeManagement.Models;
-
+using CafeManagement.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace CafeManagementBTL.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -14,9 +16,21 @@ namespace CafeManagementBTL.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Cafe()
         {
-            return View();
+            if (User.IsInRole(WebRoles.Web_Admin))
+            {
+                return RedirectToAction("List", "Cafe", new { area = "Admin" });
+            }
+            if (User.IsInRole(WebRoles.Web_Manager))
+            {
+                return RedirectToAction("List", "Cafe", new { area = "Manager" });
+            }
+            if (User.IsInRole(WebRoles.Web_Staff))
+            {
+                return RedirectToAction("List", "Cafe", new { area = "Staff" });
+            }
+            return Forbid();
         }
 
         public IActionResult Privacy()

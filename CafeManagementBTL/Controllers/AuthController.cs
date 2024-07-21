@@ -5,12 +5,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
-namespace CafeManagement.Web.Areas.Auth.Controllers
+namespace CafeManagement.Web.Controllers
 {
-    [Area("Auth")]
     public class AuthController : Controller
     {
-        
+
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<AuthController> _logger;
@@ -22,7 +21,7 @@ namespace CafeManagement.Web.Areas.Auth.Controllers
             _userManager = userManager;
         }
 
-        [Area("Auth")]
+
         [HttpGet]
         public async Task<IActionResult> Login()
         {
@@ -35,7 +34,7 @@ namespace CafeManagement.Web.Areas.Auth.Controllers
 
                 if (roles.Contains("Admin"))
                 {
-                   return RedirectToAction("Register", "AddUser", new { area = "Admin" });
+                    return RedirectToAction("Register", "AddUser", new { area = "Admin" });
                 }
                 else if (roles.Contains("Manager"))
                 {
@@ -72,7 +71,7 @@ namespace CafeManagement.Web.Areas.Auth.Controllers
                     return LocalRedirect(Url.Content("~/"));
                 }
 
-            
+
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
@@ -82,7 +81,7 @@ namespace CafeManagement.Web.Areas.Auth.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
 
-        
+
             return View(model);
         }
     }
