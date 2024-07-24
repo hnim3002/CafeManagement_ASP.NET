@@ -77,7 +77,6 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
         public async Task<IActionResult> GetAllCafe()
         {
             var cafes = await _unitOfWork.Cafe.GetAllAsync();
-            
             return Json(new { data = cafes });
         }
         #endregion
