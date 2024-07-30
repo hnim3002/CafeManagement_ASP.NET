@@ -20,12 +20,16 @@ namespace CafeManagement.DataAccess.Repository
 
         public IReceiptRepository Receipt { get; private set; }
 
+        public ICustomerRepository Customer { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Cafe = new CafeRepository(_db);
             Category = new CategoryRepository(_db);
             Customer = new CustomerRepository(_db);
+            Receipt = new ReceiptRepository(_db);
+            ReceiptDetail = new ReceiptDetailRepository(_db);
  
             ApplicationUser = new ApplicationUserRepository(_db);
         }

@@ -51,6 +51,23 @@ namespace CafeManagementBTL.Controllers
             return Forbid();
         }
 
+        public IActionResult Customer()
+        {
+            if (User.IsInRole(WebRoles.Web_Admin))
+            {
+                return RedirectToAction("ListCustomer", "Customer", new { area = "Admin" });
+            }
+            if (User.IsInRole(WebRoles.Web_Manager))
+            {
+                return RedirectToAction("ListCustomer", "Customer", new { area = "Manager" });
+            }
+            if (User.IsInRole(WebRoles.Web_Staff))
+            {
+                return RedirectToAction("ListCustomer", "Customer", new { area = "Staff" });
+            }
+            return Forbid();
+        }
+
 
         public IActionResult Privacy()
         {
