@@ -55,7 +55,8 @@ namespace CafeManagement.DataAccess.Data
                 .WithMany() // Specify the navigation property in Inventory if there is one
                 .HasForeignKey(rd => new { rd.ProductId, rd.CafeId });
 
-            // Configure the relationship between ReceiptDetail and Receipt
+            // vxcznship between ReceiptDetail and Receipt
+
             modelBuilder.Entity<ReceiptDetail>()
                 .HasOne(rd => rd.Receipt)
                 .WithMany(r => r.ReceiptDetails) // Assuming Receipt has a collection of ReceiptDetails
@@ -67,6 +68,34 @@ namespace CafeManagement.DataAccess.Data
                .WithMany(r => r.ReceiptDetails)
                .HasForeignKey(rd => rd.ReceiptId)
                .OnDelete(DeleteBehavior.Restrict); // Prevent
+
+
+            // Configure relationships WorkSchedules
+
+            modelBuilder.Entity<WorkSchedules>()
+                 .HasKey(rd => new { rd.Id, rd.CafeId, rd.EmployeeId });
+
+
+            modelBuilder.Entity<WorkSchedules>()
+                .HasOne(rd => rd.Employee)
+                .WithMany(r => r.WorkSchedules)
+                .HasForeignKey(rd => rd.EmployeeId)
+
+                .OnDelete(DeleteBehavior.Restrict);
+
+         
+
+
+
+            // Configure relationships Customer
+
+            modelBuilder.Entity<Customer>()
+                    .HasKey(rd => new { rd.Id});
+
+            
+
+
+
         }
 
     }
