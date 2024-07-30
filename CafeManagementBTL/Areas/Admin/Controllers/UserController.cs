@@ -113,6 +113,7 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
                 PhoneNumber = user.PhoneNumber,
                 Gender = user.Gender,
                 CafeId = user.CafeId,
+                Role = await _unitOfWork.ApplicationUser.GetRoleByIdAsync(user.Id),
 
                 CafeList = _unitOfWork.Cafe.GetAll().Select(i => new SelectListItem
                 {

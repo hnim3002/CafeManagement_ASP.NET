@@ -9,8 +9,12 @@ namespace CafeManagement.DataAccess.Repository.IRepository
     public interface IUnitOfWork
     {
         ICafeRepository Cafe {  get; }
-
+        ICustomerRepository Customer { get; }
         IApplicationUserRepository ApplicationUser { get; }
+
+        IReceiptDetailRepository ReceiptDetail { get; }
+
+        IReceiptRepository Receipt { get; }
     
         Task SaveAsync();
     }
