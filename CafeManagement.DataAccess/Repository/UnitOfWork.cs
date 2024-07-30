@@ -15,7 +15,6 @@ namespace CafeManagement.DataAccess.Repository
         public ICafeRepository Cafe { get; private set; }
         public ICategoryRepository Category { get; private set; }
         public ICustomerRepository Customer { get; private set; }
-        public IWorkSchedulesRepository WorkSchedules { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -23,7 +22,7 @@ namespace CafeManagement.DataAccess.Repository
             Cafe = new CafeRepository(_db);
             Category = new CategoryRepository(_db);
             Customer = new CustomerRepository(_db);
-            WorkSchedules = new WorkSchedulesRepository(_db);
+ 
             ApplicationUser = new ApplicationUserRepository(_db);
         }
 

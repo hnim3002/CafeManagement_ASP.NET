@@ -10,7 +10,6 @@ namespace CafeManagement.DataAccess.Repository.IRepository
     {
         ICafeRepository Cafe {  get; }
         ICustomerRepository Customer { get; }
-        IWorkSchedulesRepository WorkSchedules { get; }
         IApplicationUserRepository ApplicationUser { get; }
         Task SaveAsync();
     }
