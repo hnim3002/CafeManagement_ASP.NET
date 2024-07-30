@@ -14,11 +14,11 @@ namespace CafeManagement.Utilities
 {
     public class DbInitializer : IDbInitializer
     {
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<ApplicationUser> _userManager;
         private RoleManager<IdentityRole> _roleManager;
         private ApplicationDbContext _db;
 
-        public DbInitializer(UserManager<IdentityUser> userManager
+        public DbInitializer(UserManager<ApplicationUser> userManager
             , RoleManager<IdentityRole> roleManager
             , ApplicationDbContext db)
         {

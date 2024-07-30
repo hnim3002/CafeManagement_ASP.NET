@@ -50,7 +50,6 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Cafe cafe)
         {
-            
              _unitOfWork.Cafe.Update(cafe);
              await _unitOfWork.SaveAsync();
              TempData["Success"] = "Cafe updated successfully";

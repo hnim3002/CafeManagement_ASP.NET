@@ -15,11 +15,14 @@ namespace CafeManagement.DataAccess.Repository
         public ICafeRepository Cafe { get; private set; }
         public ICategoryRepository Category { get; private set; }
 
+        public IApplicationUserRepository ApplicationUser { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Cafe = new CafeRepository(_db);
             Category = new CategoryRepository(_db);
+            ApplicationUser = new ApplicationUserRepository(_db);
         }
         public async Task SaveAsync()
         {

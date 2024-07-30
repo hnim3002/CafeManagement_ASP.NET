@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CafeManagement.DataAccess.Repository
 {
-    internal class CafeRepository : Repository<Cafe>, ICafeRepository
+    public class CafeRepository : Repository<Cafe>, ICafeRepository
     {
         private ApplicationDbContext _db;
 
