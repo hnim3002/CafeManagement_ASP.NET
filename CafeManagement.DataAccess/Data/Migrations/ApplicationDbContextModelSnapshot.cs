@@ -38,7 +38,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cafes");
+                    b.ToTable("Cafes", (string)null);
 
                     b.HasData(
                         new
@@ -63,7 +63,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.Customer", b =>
@@ -84,7 +84,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.Inventory", b =>
@@ -102,7 +102,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasIndex("CafeId");
 
-                    b.ToTable("Inventories");
+                    b.ToTable("Inventories", (string)null);
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.Product", b =>
@@ -130,7 +130,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.Receipt", b =>
@@ -172,7 +172,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Receipts");
+                    b.ToTable("Receipts", (string)null);
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.ReceiptDetail", b =>
@@ -193,7 +193,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasIndex("ReceiptId");
 
-                    b.ToTable("ReceiptDetails");
+                    b.ToTable("ReceiptDetails", (string)null);
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.WorkSchedules", b =>
@@ -230,7 +230,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("WorkSchedules");
+                    b.ToTable("WorkSchedules", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -354,7 +354,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.ToTable("AspNetUsers", (string)null);
 
-                    b.HasDiscriminator().HasValue("IdentityUser");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
 
                     b.UseTphMappingStrategy();
                 });

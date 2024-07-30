@@ -9,6 +9,8 @@ namespace CafeManagement.DataAccess.Repository.IRepository
     public interface IUnitOfWork
     {
         ICafeRepository Cafe {  get; }
+
+        IApplicationUserRepository ApplicationUser { get; }
     
         Task SaveAsync();
     }

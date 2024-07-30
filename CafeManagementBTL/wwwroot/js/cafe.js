@@ -16,7 +16,9 @@ function loadData() {
                 data: null, 
                 render: function (data, type, row) {
                  
-                    return '<i class="bi bi-pencil-square"></i>';
+                    return `<a href="/admin/cafe/edit/${row.id}" class="btn btn-primary">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>`;
                 },
                 orderable: false, // This column should not be orderable
             },
@@ -24,3 +26,5 @@ function loadData() {
 
     });
 }
+
+
