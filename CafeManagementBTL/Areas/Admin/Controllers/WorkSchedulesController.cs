@@ -82,6 +82,6 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
         }
         #endregion
 
-vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
     }
 }
