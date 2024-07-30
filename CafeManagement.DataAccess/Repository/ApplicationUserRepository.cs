@@ -1,15 +1,11 @@
 ﻿using CafeManagement.DataAccess.Data;
 using CafeManagement.DataAccess.Repository.IRepository;
 using CafeManagement.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace CafeManagement.DataAccess.Repository
 {
-    internal class ApplicationUserRepository : Repository<ApplicationUser>, IApplicationUserRepository
+    public class ApplicationUserRepository : Repository<ApplicationUser>, IApplicationUserRepository
     {
         private ApplicationDbContext _db;
 
@@ -17,6 +13,18 @@ namespace CafeManagement.DataAccess.Repository
         {
             _db = db;
         }
+
+        public async Task<string> GetRoleByIdAsync(String userId)
+        {
+            var roleName = await(from user in _db.ApplicationUsers
+                                 join userRole in _db.UserRoles on user.Id equals userRole.UserId
+                                 join role in _db.Roles on userRole.RoleId equals role.Id
+                                 where user.Id == userId
+                                 select role.Name).FirstOrDefaultAsync();
+
+            return roleName;
+        }
+
         public void Update(ApplicationUser obj)
         {
             _db.ApplicationUsers.Update(obj);

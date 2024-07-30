@@ -10,11 +10,11 @@ namespace CafeManagement.Web.Controllers
     public class AuthController : Controller
     {
 
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<AuthController> _logger;
 
-        public AuthController(SignInManager<IdentityUser> signInManager, ILogger<AuthController> logger, UserManager<IdentityUser> userManager)
+        public AuthController(SignInManager<ApplicationUser> signInManager, ILogger<AuthController> logger, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;

@@ -3,20 +3,20 @@ using CafeManagement.Models.Entities;
 using CafeManagement.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CafeManagement.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = WebRoles.Web_Admin)]
-    public class CafeController : Controller
+    public class ReceiptController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CafeController(IUnitOfWork unitOfWork)
+        public ReceiptController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
+
 
         [HttpGet]
         public IActionResult List()
@@ -25,8 +25,8 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create() 
-        { 
+        public IActionResult Create()
+        {
             return View();
         }
 
@@ -50,10 +50,10 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Cafe cafe)
         {
-             _unitOfWork.Cafe.Update(cafe);
-             await _unitOfWork.SaveAsync();
-             TempData["Success"] = "Cafe updated successfully";
-             return RedirectToAction("List");
+            _unitOfWork.Cafe.Update(cafe);
+            await _unitOfWork.SaveAsync();
+            TempData["Success"] = "Cafe updated successfully";
+            return RedirectToAction("List");
         }
 
         [HttpPost]
@@ -73,10 +73,10 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
 
         #region API CALLS
         [HttpGet]
-        public async Task<IActionResult> GetAllCafe()
+        public async Task<IActionResult> GetAllReceipts()
         {
-            var cafes = await _unitOfWork.Cafe.GetAllAsync();
-            return Json(new { data = cafes });
+            var receipts = await _unitOfWork.Receipt.GetAllAsync();
+            return Json(new { data = receipts });
         }
         #endregion
     }

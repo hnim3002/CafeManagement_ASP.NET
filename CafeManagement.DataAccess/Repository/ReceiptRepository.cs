@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace CafeManagement.DataAccess.Repository
 {
-    public class CafeRepository : Repository<Cafe>, ICafeRepository
+    public class ReceiptRepository : Repository<Receipt>, IReceiptRepository
     {
         private ApplicationDbContext _db;
-
-        public CafeRepository(ApplicationDbContext db) : base(db)
+        public ReceiptRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
-        public void Update(Cafe obj)
+
+        public void Update(Receipt obj)
         {
-            _db.Cafes.Update(obj);
+            _db.Receipts.Update(obj);
         }
     }
 }

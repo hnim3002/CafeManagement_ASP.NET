@@ -17,18 +17,18 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class AddUserController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly IUserStore<IdentityUser> _userStore;
-        private readonly IUserEmailStore<IdentityUser> _emailStore;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserStore<ApplicationUser> _userStore;
+        private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<AddUserController> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
         private ApplicationDbContext _db;
 
-        public AddUserController(UserManager<IdentityUser> userManager,
-            IUserStore<IdentityUser> userStore,
-            SignInManager<IdentityUser> signInManager,
+        public AddUserController(UserManager<ApplicationUser> userManager,
+            IUserStore<ApplicationUser> userStore,
+            SignInManager<ApplicationUser> signInManager,
             ILogger<AddUserController> logger,
             IEmailSender emailSender,
             RoleManager<IdentityRole> roleManager,
@@ -44,13 +44,13 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
             _db = db;
         }
 
-        private IUserEmailStore<IdentityUser> GetEmailStore()
+        private IUserEmailStore<ApplicationUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<IdentityUser>)_userStore;
+            return (IUserEmailStore<ApplicationUser>)_userStore;
         }
 
         [HttpGet]
@@ -60,7 +60,6 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
 
             RegisterVM registerVM = new()
             {
-                
                 Roles = roles.Select(i => new SelectListItem
                 {
                     Text = i.Name,
@@ -81,27 +80,17 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
                 var cafeId = _db.Cafes.FirstOrDefault().Id;
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, CafeId = cafeId };
                 var result = await _userManager.CreateAsync(user, model.Password);
-
+          
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
+                     
                     var appUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == model.Email);
                     if (appUser != null)
                     {
                         _userManager.AddToRoleAsync(appUser, model.Role).GetAwaiter().GetResult();
 
                     }
-
-                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    //{
-                    //    return RedirectToAction("RegisterConfirmation", new { email = model.Email, returnUrl });
-                    //}
-                    //else
-                    //{
-                    //    await _signInManager.SignInAsync(user, isPersistent: false);
-                    //    return LocalRedirect(returnUrl ?? "/");
-                    //}
                 }
 
                 foreach (var error in result.Errors)
@@ -114,7 +103,6 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
 
             RegisterVM registerVM = new()
             {
-
                 Roles = roles.Select(i => new SelectListItem
                 {
                     Text = i.Name,
@@ -122,7 +110,6 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
                 })
             };
 
-        
             return View(registerVM);
         }
     }
