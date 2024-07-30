@@ -14,8 +14,11 @@ namespace CafeManagement.DataAccess.Repository
 
         public ICafeRepository Cafe { get; private set; }
         public ICategoryRepository Category { get; private set; }
-
         public IApplicationUserRepository ApplicationUser { get; private set; }
+
+        public IReceiptDetailRepository ReceiptDetail { get; private set; }
+
+        public IReceiptRepository Receipt { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -23,6 +26,8 @@ namespace CafeManagement.DataAccess.Repository
             Cafe = new CafeRepository(_db);
             Category = new CategoryRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
+            ReceiptDetail = new ReceiptDetailRepository(_db);
+            Receipt = new ReceiptRepository(_db);
         }
         public async Task SaveAsync()
         {
