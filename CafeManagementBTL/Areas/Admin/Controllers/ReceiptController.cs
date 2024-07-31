@@ -107,6 +107,15 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
                 };
 
                 await _unitOfWork.ReceiptDetail.AddAsync(receiptDetail);
+
+            var inventory = await _unitOfWork.Inventory.GetAsync(u => u.ProductId == receiptDetail.ProductId && u.CafeId == receiptDetail.CafeId);
+
+            var receipt = await _unitOfWork.Receipt.GetAsync(u => u.Id == receiptDetailVM.Receipt.Id);
+            receipt.Total += receiptDetail.Quantity * inventory.Price;
+            receipt.FinalTotal = receipt.Total - (receipt.Discount + receipt.Tax)* receipt.Total;
+            _unitOfWork.Receipt.Update(receipt);
+  
+
                 await _unitOfWork.SaveAsync();
                 TempData["Success"] = "Receipt detail added successfully";
                 return RedirectToAction("CreateDetail", new { id = receiptDetailVM.Receipt.Id });

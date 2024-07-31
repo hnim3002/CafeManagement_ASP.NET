@@ -12,6 +12,7 @@ function loadData() {
             { data: 'product.name' },
             { data: 'quantity' },
             { data: 'cafe.name' },
+            {data: 'price'},
             {
                 data: null,
                 render: function (data, type, row) {
