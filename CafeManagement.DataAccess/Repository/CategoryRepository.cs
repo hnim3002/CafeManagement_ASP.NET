@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CafeManagement.DataAccess.Repository
 {
-    public class CategoryRepository : Repository<Cafe>, ICategoryRepository
+    public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
         private ApplicationDbContext _db;
 
@@ -17,9 +17,11 @@ namespace CafeManagement.DataAccess.Repository
         {
             _db = db;
         }
-        public void Update(Cafe obj)
+
+
+        public void Update(Category obj)
         {
-            _db.Cafes.Update(obj);
+            _db.Categories.Update(obj);
         }
     }
 }

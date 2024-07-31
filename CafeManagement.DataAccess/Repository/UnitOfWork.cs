@@ -14,6 +14,8 @@ namespace CafeManagement.DataAccess.Repository
 
         public ICafeRepository Cafe { get; private set; }
         public ICategoryRepository Category { get; private set; }
+        public IInventoryRepository Inventory { get; private set; }
+        public IProductRepository Product { get; private set; }
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
 
@@ -22,6 +24,8 @@ namespace CafeManagement.DataAccess.Repository
             _db = db;
             Cafe = new CafeRepository(_db);
             Category = new CategoryRepository(_db);
+            Inventory = new InventoryRepository(_db);
+            Product = new ProductRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
         }
         public async Task SaveAsync()

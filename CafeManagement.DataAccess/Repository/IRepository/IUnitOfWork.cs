@@ -8,10 +8,13 @@ namespace CafeManagement.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {
-        ICafeRepository Cafe {  get; }
+        ICafeRepository Cafe { get; }
+        ICategoryRepository Category { get; }
+        IInventoryRepository Inventory { get; }
+        IProductRepository Product { get; }
 
         IApplicationUserRepository ApplicationUser { get; }
-    
+
         Task SaveAsync();
     }
 }
