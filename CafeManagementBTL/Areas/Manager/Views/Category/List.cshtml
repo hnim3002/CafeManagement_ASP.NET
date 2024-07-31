@@ -1,5 +1,4 @@
-﻿
-@model CafeManagement.Models.Entities.Product
+﻿@model IEnumerable<CafeManagement.Models.Entities.Category>
 
 @{
     ViewData["Title"] = "List";
@@ -19,14 +18,11 @@
     </div>
 </div>
 
-<table id="tblProduct" class="table table-bordered table-striped">
+<table id="tblCategory" class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Category Name</th>
+            <td>Id</td>
+            <td>Name</td>
         </tr>
     </thead>
     <tbody>
@@ -34,6 +30,5 @@
 </table>
 
 @section Scripts {
-    <script src="~/js/Admin/product.js"></script>
+    <script src="~/js/Manager/category.js"></script>
 }
-

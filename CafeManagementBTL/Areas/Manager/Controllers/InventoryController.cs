@@ -9,11 +9,11 @@ using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
-namespace CafeManagement.Web.Areas.Admin.Controllers
+namespace CafeManagement.Web.Areas.Manager.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = WebRoles.Web_Admin)]
-    [Route("admin/[controller]/[action]")]
+    [Area("Manager")]
+    [Authorize(Roles = WebRoles.Web_Manager)]
+    [Route("Manager/[controller]/[action]")]
     public class InventoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
