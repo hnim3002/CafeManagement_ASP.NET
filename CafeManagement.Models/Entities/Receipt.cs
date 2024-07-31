@@ -15,8 +15,6 @@ namespace CafeManagement.Models.Entities
         [Required]
         public DateTime Date { get; set; }
         [Required]
-        public string CustomerPhoneNumber { get; set; }
-        [Required]
         public string EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
         public ApplicationUser Employees { get; set; }

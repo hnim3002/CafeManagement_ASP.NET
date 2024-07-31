@@ -10,5 +10,10 @@ namespace CafeManagement.DataAccess.Repository.IRepository
     public interface IReceiptRepository : IRepository<Receipt>
     {
         void Update(Receipt obj);
+
+        Task<Receipt> GetReceiptWithDetailsAsync(Guid id);
+
+
+
     }
 }

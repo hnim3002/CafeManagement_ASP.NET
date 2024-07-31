@@ -11,6 +11,7 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = WebRoles.Web_Admin)]
+    [Route("admin/[controller]/[action]")]
     public class ReceiptController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -50,6 +51,7 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
             var receipt = new Receipt
             {
                 EmployeeId = userId,        
+              
                 CafeId = receiptVM.CafeId,
                 Date = DateTime.Now,
                 Discount = receiptVM.Discount,
@@ -64,16 +66,20 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
             await _unitOfWork.SaveAsync();
             TempData["Success"] = "Receipt created successfully";
             return RedirectToAction("CreateDetail", new { id = receipt.Id });
-            //return RedirectToAction("List");
         }
 
 
+
         [HttpGet]
+
         public async Task<IActionResult> CreateDetail(Guid id)
         {
-            
+            var a = await _unitOfWork.Receipt.GetAsync(u => u.Id == id, includeProperties: "Cafe");
 
-            var receipt = await _unitOfWork.Receipt.GetAsync(u => u.Id == id);
+
+            var receipt = await _unitOfWork.Receipt.GetReceiptWithDetailsAsync(id);
+
+            receipt.Cafe = a.Cafe;
             var receiptDetailVM = new ReceiptDetailVM
             {
                 ReceiptId = receipt.Id,
@@ -85,8 +91,31 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
                 })
             };
 
-            return View();
+            return View(receiptDetailVM);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateDetail(ReceiptDetailVM receiptDetailVM)
+        {
+           
+                var receiptDetail = new ReceiptDetail
+                {
+                    ReceiptId = receiptDetailVM.Receipt.Id,
+                    ProductId = receiptDetailVM.ProductId,
+                    CafeId = receiptDetailVM.Receipt.Cafe.Id,
+                    Quantity = receiptDetailVM.Quantity,                  
+                };
+
+                await _unitOfWork.ReceiptDetail.AddAsync(receiptDetail);
+                await _unitOfWork.SaveAsync();
+                TempData["Success"] = "Receipt detail added successfully";
+                return RedirectToAction("CreateDetail", new { id = receiptDetailVM.Receipt.Id });
+            
+
+           
+        }
+
+
 
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
@@ -124,26 +153,22 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllReceipts()
         {
-            var receipts = await _unitOfWork.Receipt.GetAllAsync();
+            var receipts = await _unitOfWork.Receipt.GetAllAsync(includeProperties: "Cafe");
 
-            var receiptVMs = receipts.Select(receipt => new ReceiptVM
+            var receiptVMs = receipts.Select(receipt => new ViewReceipt
             {
                 EmployeeId = receipt.EmployeeId,
-                CafeId = receipt.CafeId,
+                Cafe = receipt.Cafe,
                 Date = receipt.Date,
                 Discount = receipt.Discount,
                 FinalTotal = receipt.FinalTotal,
                 Id = receipt.Id,
                 Tax = receipt.Tax,
                 Total = receipt.Total,
-                CafeList = _unitOfWork.Cafe.GetAll().ToList().Select(i => new SelectListItem
-                {
-                    Text = i.Name,
-                    Value = i.Id.ToString()
-                })
+               
             }).ToList();
 
-            return Json(new { data = receipts });
+            return Json(new { data = receiptVMs });
         }
         #endregion
     }

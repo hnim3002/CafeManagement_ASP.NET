@@ -1,6 +1,7 @@
 ﻿using CafeManagement.DataAccess.Data;
 using CafeManagement.DataAccess.Repository.IRepository;
 using CafeManagement.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,14 @@ namespace CafeManagement.DataAccess.Repository
         {
             _db = db;
         }
+
+        public async Task<Receipt> GetReceiptWithDetailsAsync(Guid id)
+        {
+            return await _db.Receipts
+               .Include(r => r.ReceiptDetails)
+               .FirstOrDefaultAsync(r => r.Id == id);
+        }
+
 
         public void Update(Receipt obj)
         {

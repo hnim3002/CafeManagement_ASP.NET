@@ -32,7 +32,6 @@ namespace CafeManagement.DataAccess.Repository
             Customer = new CustomerRepository(_db);
             Receipt = new ReceiptRepository(_db);
             ReceiptDetail = new ReceiptDetailRepository(_db);
- 
             Inventory = new InventoryRepository(_db);
             Product = new ProductRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);

@@ -105,7 +105,6 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
 
             // Cập nhật các thuộc tính của sản phẩm
             existingProduct.Name = product.Name;
-            existingProduct.Price = product.Price;
             // Thêm các thuộc tính khác nếu có
 
             _unitOfWork.Product.Update(existingProduct);

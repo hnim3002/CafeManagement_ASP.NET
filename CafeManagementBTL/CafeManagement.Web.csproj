@@ -61,7 +61,7 @@
     <None Include="Areas\Manager\Views\Product\Delete.cshtml" />
     <None Include="Areas\Manager\Views\Product\Edit.cshtml" />
     <None Include="Areas\Manager\Views\Product\List.cshtml" />
-    <None Include="wwwroot\js\user.js" />
+    <None Include="wwwroot\js\Admin\user.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />

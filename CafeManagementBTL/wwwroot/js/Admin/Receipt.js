@@ -12,16 +12,17 @@ function loadData() {
     var table = $('#tblReceipt').DataTable({
         destroy: true,  // Ensure any existing table is destroyed before reinitializing
         ajax: {
-            url: '/admin/Receipt/getallreceipt',
+            url: '/admin/Receipt/GetAllReceipts',
         },
         columns: [
             { data: 'id' },
-            { data: 'fullName' },
-            { data: 'phoneNumber' },
-            { data: 'role' },
-            { data: 'address' },
-            { data: 'dateOfBirth' },
+            { data: 'date' },
+            { data: 'employeeId' },
             { data: 'cafe.name' },
+            { data: 'total' },
+            { data: 'discount' },
+            { data: 'tax' },
+            { data: 'finalTotal' },
             {
                 data: null,
                 render: function (data, type, row) {

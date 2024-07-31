@@ -12,7 +12,6 @@ namespace CafeManagement.DataAccess.Repository.IRepository
         ICategoryRepository Category { get; }
         IInventoryRepository Inventory { get; }
         IProductRepository Product { get; }
-        ICafeRepository Cafe {  get; }
         ICustomerRepository Customer { get; }
         IApplicationUserRepository ApplicationUser { get; }
 
