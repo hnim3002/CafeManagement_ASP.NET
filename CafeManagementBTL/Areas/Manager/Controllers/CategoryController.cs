@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace CafeManagement.Web.Areas.Admin.Controllers
+namespace CafeManagement.Web.Areas.Manager.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = WebRoles.Web_Admin)]
+    [Area("Manager")]
+    [Authorize(Roles = WebRoles.Web_Manager)]
     public class CategoryController : Controller
     {
 

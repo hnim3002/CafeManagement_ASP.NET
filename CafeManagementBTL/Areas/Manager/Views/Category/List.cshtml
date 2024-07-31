@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CafeManagement.Models.Entities.Category>
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Product</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle-fill"></i> Create New Product
+            </a>
+        </div>
+    </div>
+</div>
+
+<table id="tblCategory" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/Manager/category.js"></script>
+}

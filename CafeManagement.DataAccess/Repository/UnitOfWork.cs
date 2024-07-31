@@ -17,6 +17,8 @@ namespace CafeManagement.DataAccess.Repository
         public IApplicationUserRepository ApplicationUser { get; private set; }
 
         public IReceiptDetailRepository ReceiptDetail { get; private set; }
+        public IInventoryRepository Inventory { get; private set; }
+        public IProductRepository Product { get; private set; }
 
         public IReceiptRepository Receipt { get; private set; }
 
@@ -31,6 +33,8 @@ namespace CafeManagement.DataAccess.Repository
             Receipt = new ReceiptRepository(_db);
             ReceiptDetail = new ReceiptDetailRepository(_db);
  
+            Inventory = new InventoryRepository(_db);
+            Product = new ProductRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
         }
 
