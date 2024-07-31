@@ -1,20 +1,23 @@
-﻿using System;
+﻿using CafeManagement.Models.Entities;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace CafeManagement.Models.Entities
+namespace CafeManagement.Models.ViewModel
 {
-    public class Receipt
+    public class ReceiptVM
     {
-        [Key]
         public Guid Id { get; set; }
         [Required]
         public DateTime Date { get; set; }
         [Required]
+        [Phone]
         public string CustomerPhoneNumber { get; set; }
         [Required]
         public string EmployeeId { get; set; }
@@ -32,7 +35,9 @@ namespace CafeManagement.Models.Entities
         public double Tax { get; set; }
         [Required]
         public double FinalTotal { get; set; }
-        
-        public ICollection<ReceiptDetail> ReceiptDetails { get; set; }
+
+        [ValidateNever]
+        public IEnumerable<SelectListItem> CafeList { get; set; }
+
     }
 }
