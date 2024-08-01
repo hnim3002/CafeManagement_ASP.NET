@@ -3,7 +3,7 @@
 *@
 @{
 }
-@model CafeManagement.Models.Entities.Inventory
+@model IEnumerable<CafeManagement.Models.Entities.Category>
 
 @{
     ViewData["Title"] = "List";
@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Inventory</h2>
+            <h2 class="text-primary">Product</h2>
         </div>
         <div class="col-6 text-end">
             <a asp-action="Create" class="btn btn-primary">
@@ -23,12 +23,11 @@
     </div>
 </div>
 
-<table id="tblInventory" class="table table-bordered table-striped">
+<table id="tblCategory" class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Product Name</th>
-            <th>Quanlity</th>
-            <th>Cafes Name</th>
+            <td>Id</td>
+            <td>Name</td>
         </tr>
     </thead>
     <tbody>
@@ -36,5 +35,5 @@
 </table>
 
 @section Scripts {
-    <script src="~/js/Manager/Inventory.js"></script>
+    <script src="~/js/Staff/category.js"></script>
 }

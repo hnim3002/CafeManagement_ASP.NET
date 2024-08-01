@@ -6,7 +6,7 @@ function loadData() {
     $('#tblInventory').DataTable({
         destroy: true,  // Ensure any existing table is destroyed before reinitializing
         ajax: {
-            url: '/admin/inventory/GetAllInventory',
+            url: '/manager/inventory/GetAllInventory',
         },
         columns: [
             { data: 'product.name' },
@@ -16,7 +16,7 @@ function loadData() {
                 data: null,
                 render: function (data, type, row) {
                     var html = `
-                        <form action="/admin/inventory/delete" class="delete-form" method="post" style="display:inline;">
+                        <form action="/manager/inventory/delete" class="delete-form" method="post" style="display:inline;">
                         <input type="hidden" name="productId" value="${data.product.id}" />
                         <input type="hidden" name="cafeId" value="${data.cafe.id}" />
                             <button type="submit" class="btn btn-sm btn-dark">

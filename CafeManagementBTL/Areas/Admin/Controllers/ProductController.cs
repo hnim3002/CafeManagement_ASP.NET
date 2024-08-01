@@ -19,6 +19,8 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
+
+        [HttpGet]
         public IActionResult List()
         {
             return View();
@@ -78,42 +80,39 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Product product)
         {
-            if (product == null || product.Id <= 0)
-            {
-                _logger.LogError("Edit failed: Product is null or ID is invalid.");
-                TempData["Error"] = "Product not found or invalid.";
-                return RedirectToAction("List");
-            }
 
-            if (!ModelState.IsValid)
-            {
-                // ModelState không hợp lệ
-                _logger.LogError("Edit failed: ModelState is invalid.");
-                TempData["Error"] = "Invalid product data.";
-                return View(product); // Trả về lại trang Edit với thông báo lỗi
-            }
-
-            _logger.LogInformation($"Attempting to Edit product with ID {product.Id}");
-
-            var existingProduct = await _unitOfWork.Product.GetByProductIDAysnc(product.Id);
-            if (existingProduct == null)
-            {
-                _logger.LogError($"Product with ID {product.Id} not found.");
-                TempData["Error"] = "Product not found.";
-                return RedirectToAction("List");
-            }
-
-            // Cập nhật các thuộc tính của sản phẩm
-            existingProduct.Name = product.Name;
-            existingProduct.Price = product.Price;
-            // Thêm các thuộc tính khác nếu có
-
-            _unitOfWork.Product.Update(existingProduct);
+            _unitOfWork.Product.Update(product);
             await _unitOfWork.SaveAsync();
-            _logger.LogInformation("Product Edited successfully");
-
-            TempData["Success"] = "Product Edited successfully";
+            TempData["Success"] = "product updated successfully";
             return RedirectToAction("List");
+
+            //if (product == null || product.Id <= 0)
+            //{
+            //    _logger.LogError("Edit failed: Product is null or ID is invalid.");
+            //    TempData["Error"] = "Product not found or invalid.";
+            //    return RedirectToAction("List");
+            //}
+
+            //if (!ModelState.IsValid)
+            //{
+            //    // ModelState không hợp lệ
+            //    _logger.LogError("Edit failed: ModelState is invalid.");
+            //    TempData["Error"] = "Invalid product data.";
+            //    return View(product); // Trả về lại trang Edit với thông báo lỗi
+            //}
+
+            //_logger.LogInformation($"Attempting to Edit product with ID {product.Id}");
+            //// Cập nhật các thuộc tính của sản phẩm
+            //existingProduct.Name = product.Name;
+            //existingProduct.Price = product.Price;
+            //// Thêm các thuộc tính khác nếu có
+
+            //_unitOfWork.Product.Update(existingProduct);
+            //await _unitOfWork.SaveAsync();
+            //_logger.LogInformation("Product Edited successfully");
+
+            //TempData["Success"] = "Product Edited successfully";
+            //return RedirectToAction("List");
         }
 
         [HttpGet]
