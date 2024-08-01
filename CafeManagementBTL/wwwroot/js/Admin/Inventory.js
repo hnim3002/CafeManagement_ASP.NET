@@ -19,7 +19,7 @@ function loadData() {
                         <form action="/admin/inventory/delete" class="delete-form" method="post" style="display:inline;">
                         <input type="hidden" name="productId" value="${data.product.id}" />
                         <input type="hidden" name="cafeId" value="${data.cafe.id}" />
-                            <button type="submit" class="btn btn-sm btn-danger">
+                            <button type="submit" class="btn btn-sm btn-dark">
                                 <i class="bi bi-trash"></i> Delete
                             </button>
                     </form>
