@@ -11,6 +11,7 @@ function loadData() {
         columns: [
             { data: 'product.name' },
             { data: 'quantity' },
+            { data: 'price' },
             { data: 'cafe.name' },
             //{
             //    data: null,

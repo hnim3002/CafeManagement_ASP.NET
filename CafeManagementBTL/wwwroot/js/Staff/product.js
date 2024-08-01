@@ -12,7 +12,6 @@ function loadData() {
             { data: 'id' },
             { data: 'name' },
             { data: 'description' },
-            { data: 'price' },
             { data: 'category.name' },
             //{
             //    data: null,
