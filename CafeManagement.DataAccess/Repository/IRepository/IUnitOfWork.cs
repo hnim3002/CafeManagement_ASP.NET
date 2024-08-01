@@ -12,9 +12,13 @@ namespace CafeManagement.DataAccess.Repository.IRepository
         ICategoryRepository Category { get; }
         IInventoryRepository Inventory { get; }
         IProductRepository Product { get; }
-
+        ICustomerRepository Customer { get; }
         IApplicationUserRepository ApplicationUser { get; }
 
+        IReceiptDetailRepository ReceiptDetail { get; }
+
+        IReceiptRepository Receipt { get; }
+    
         Task SaveAsync();
     }
 }

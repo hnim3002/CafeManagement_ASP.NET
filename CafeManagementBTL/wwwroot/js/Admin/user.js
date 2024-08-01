@@ -31,6 +31,9 @@ function loadData() {
                             <a href="/admin/user/edit/${row.id}" class="btn btn-primary">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
+                            <a href="/admin/user/passchange" class="btn btn-secondary">
+                                Change Password
+                            </a>
                             <button class="btn btn-danger btn-delete" data-id="${row.id}">
                                 <i class="bi bi-x-lg"></i>
                             </button>

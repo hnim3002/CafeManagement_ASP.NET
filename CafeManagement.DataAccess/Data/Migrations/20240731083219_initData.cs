@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CafeManagement.DataAccess.Data.Migrations
+namespace CafeManagement.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class update_user_model : Migration
+    public partial class initData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,12 +14,12 @@ namespace CafeManagement.DataAccess.Data.Migrations
             migrationBuilder.DeleteData(
                 table: "Cafes",
                 keyColumn: "Id",
-                keyValue: new Guid("b6c2cd49-5e4a-480f-8a6d-95de0104bde9"));
+                keyValue: new Guid("e3c77ca4-3c53-492d-9702-7c0ab41d6860"));
 
             migrationBuilder.InsertData(
                 table: "Cafes",
                 columns: new[] { "Id", "Address", "Name" },
-                values: new object[] { new Guid("46ae7872-16e1-4124-80b3-9b22cee66c2c"), "96 Dinh cong", "CafeM1" });
+                values: new object[] { new Guid("7ac1f73b-64bd-41fd-9532-0ad57d98ff11"), "96 Dinh cong", "CafeM1" });
         }
 
         /// <inheritdoc />
@@ -28,12 +28,12 @@ namespace CafeManagement.DataAccess.Data.Migrations
             migrationBuilder.DeleteData(
                 table: "Cafes",
                 keyColumn: "Id",
-                keyValue: new Guid("46ae7872-16e1-4124-80b3-9b22cee66c2c"));
+                keyValue: new Guid("7ac1f73b-64bd-41fd-9532-0ad57d98ff11"));
 
             migrationBuilder.InsertData(
                 table: "Cafes",
                 columns: new[] { "Id", "Address", "Name" },
-                values: new object[] { new Guid("b6c2cd49-5e4a-480f-8a6d-95de0104bde9"), "96 Dinh cong", "CafeM1" });
+                values: new object[] { new Guid("e3c77ca4-3c53-492d-9702-7c0ab41d6860"), "96 Dinh cong", "CafeM1" });
         }
     }
 }

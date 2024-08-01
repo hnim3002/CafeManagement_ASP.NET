@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CafeManagement.DataAccess.Data.Migrations
+namespace CafeManagement.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -38,12 +38,12 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cafes", (string)null);
+                    b.ToTable("Cafes");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b6c2cd49-5e4a-480f-8a6d-95de0104bde9"),
+                            Id = new Guid("7ac1f73b-64bd-41fd-9532-0ad57d98ff11"),
                             Address = "96 Dinh cong",
                             Name = "CafeM1"
                         });
@@ -63,7 +63,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.Customer", b =>
@@ -84,7 +84,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.Inventory", b =>
@@ -95,6 +95,9 @@ namespace CafeManagement.DataAccess.Data.Migrations
                     b.Property<Guid>("CafeId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -102,7 +105,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasIndex("CafeId");
 
-                    b.ToTable("Inventories", (string)null);
+                    b.ToTable("Inventories");
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.Product", b =>
@@ -123,14 +126,11 @@ namespace CafeManagement.DataAccess.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.Receipt", b =>
@@ -142,8 +142,9 @@ namespace CafeManagement.DataAccess.Data.Migrations
                     b.Property<Guid>("CafeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("CustomerPhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -168,11 +169,9 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasIndex("CafeId");
 
-                    b.HasIndex("CustomerId");
-
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Receipts", (string)null);
+                    b.ToTable("Receipts");
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.ReceiptDetail", b =>
@@ -193,24 +192,22 @@ namespace CafeManagement.DataAccess.Data.Migrations
 
                     b.HasIndex("ReceiptId");
 
-                    b.ToTable("ReceiptDetails", (string)null);
+                    b.ToTable("ReceiptDetails");
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.WorkSchedules", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CafeId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("EmployeeId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("EmployeeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<TimeOnly>("EndTime")
                         .HasColumnType("time");
@@ -224,13 +221,13 @@ namespace CafeManagement.DataAccess.Data.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id", "CafeId", "EmployeeId");
 
                     b.HasIndex("CafeId");
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("WorkSchedules", (string)null);
+                    b.ToTable("WorkSchedules");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -469,7 +466,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
             modelBuilder.Entity("CafeManagement.Models.Entities.Inventory", b =>
                 {
                     b.HasOne("CafeManagement.Models.Entities.Cafe", "Cafe")
-                        .WithMany("Inventories")
+                        .WithMany()
                         .HasForeignKey("CafeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -499,14 +496,8 @@ namespace CafeManagement.DataAccess.Data.Migrations
             modelBuilder.Entity("CafeManagement.Models.Entities.Receipt", b =>
                 {
                     b.HasOne("CafeManagement.Models.Entities.Cafe", "Cafe")
-                        .WithMany("Receipts")
+                        .WithMany()
                         .HasForeignKey("CafeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CafeManagement.Models.Entities.Customer", "Customer")
-                        .WithMany("Receipts")
-                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -517,8 +508,6 @@ namespace CafeManagement.DataAccess.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Cafe");
-
-                    b.Navigation("Customer");
 
                     b.Navigation("Employees");
                 });
@@ -545,7 +534,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
             modelBuilder.Entity("CafeManagement.Models.Entities.WorkSchedules", b =>
                 {
                     b.HasOne("CafeManagement.Models.Entities.Cafe", "Cafe")
-                        .WithMany("WorkSchedules")
+                        .WithMany()
                         .HasForeignKey("CafeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -553,7 +542,7 @@ namespace CafeManagement.DataAccess.Data.Migrations
                     b.HasOne("CafeManagement.Models.Entities.ApplicationUser", "Employee")
                         .WithMany("WorkSchedules")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Cafe");
@@ -615,28 +604,12 @@ namespace CafeManagement.DataAccess.Data.Migrations
             modelBuilder.Entity("CafeManagement.Models.Entities.ApplicationUser", b =>
                 {
                     b.HasOne("CafeManagement.Models.Entities.Cafe", "Cafe")
-                        .WithMany("Employees")
+                        .WithMany()
                         .HasForeignKey("CafeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cafe");
-                });
-
-            modelBuilder.Entity("CafeManagement.Models.Entities.Cafe", b =>
-                {
-                    b.Navigation("Employees");
-
-                    b.Navigation("Inventories");
-
-                    b.Navigation("Receipts");
-
-                    b.Navigation("WorkSchedules");
-                });
-
-            modelBuilder.Entity("CafeManagement.Models.Entities.Customer", b =>
-                {
-                    b.Navigation("Receipts");
                 });
 
             modelBuilder.Entity("CafeManagement.Models.Entities.Receipt", b =>
