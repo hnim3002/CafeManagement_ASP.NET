@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CafeManagement.Web.Areas.Manager.Controllers
+namespace CafeManagement.Web.Areas.Staff.Controllers
 {
-    [Area("Manager")]
-    [Authorize(Roles = WebRoles.Web_Manager)]
+    [Area("Staff")]
+    [Authorize(Roles = WebRoles.Web_Staff)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -19,6 +19,7 @@ namespace CafeManagement.Web.Areas.Manager.Controllers
             _unitOfWork = unitOfWork;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
+
         [HttpGet]
         public IActionResult List()
         {

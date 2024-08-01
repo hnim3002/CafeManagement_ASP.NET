@@ -23,7 +23,7 @@ namespace CafeManagement.Web.Areas.Manager.Controllers
             _unitOfWork = unitOfWork;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
-
+        [HttpGet]
         public IActionResult List()
         {
             return View();
