@@ -84,5 +84,14 @@ namespace CafeManagement.Web.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            TempData["Success"] = "You have been logged out.";
+            return RedirectToAction("Login", "Auth");
+        }
     }
 }

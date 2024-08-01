@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 
-namespace CafeManagement.Web.Areas.Admin.Controllers
+namespace CafeManagement.Web.Areas.Manager.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = WebRoles.Web_Admin)]
-    [Route("admin/[controller]/[action]")]
+    [Area("Manager")]
+    [Authorize(Roles = WebRoles.Web_Manager)]
+    [Route("manager/[controller]/[action]")]
     public class ReceiptController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

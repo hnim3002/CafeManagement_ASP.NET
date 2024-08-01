@@ -29,8 +29,8 @@ function loadData() {
 
                     return `
                         <div class="d-flex">
-                            <a href="/admin/user/edit/${row.id}" class="btn btn-primary">
-                                <i class="bi bi-pencil-square"></i>
+                            <a href="/admin/Receipt/Detail/${row.id}" class="btn btn-primary">
+                                Detail
                             </a>
                             <button class="btn btn-danger btn-delete" data-id="${row.id}">
                                 <i class="bi bi-x-lg"></i>
@@ -47,16 +47,16 @@ function loadData() {
         table.column(3).search(selectedRole).draw();
     });
 
-    $('#tblUser tbody').on('click', '.btn-delete', function () {
+    $('#tblReceipt tbody').on('click', '.btn-delete', function () {
         var userId = $(this).data('id');
         console.log(userId)
         if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
             $.ajax({
-                url: `/admin/user/delete/${userId}`,
+                url: `/admin/receipt/delete/${userId}`,
                 type: 'DELETE',
                 success: function (data) {
                     if (data.success) {
-                        var row = $(`#tblUser tbody .btn-delete[data-id="${userId}"]`).closest('tr');
+                        var row = $(`#tblReceipt tbody .btn-delete[data-id="${userId}"]`).closest('tr');
                         table.row(row).remove().draw();
                     } else {
                         console.error('Error:', data.message);

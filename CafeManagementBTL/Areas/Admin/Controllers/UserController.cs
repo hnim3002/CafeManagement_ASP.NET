@@ -20,15 +20,19 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public UserController(
             IUnitOfWork unitOfWork, 
             UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            SignInManager<ApplicationUser> signInManager
+            )
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
             _roleManager = roleManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult List()
@@ -80,11 +84,11 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
                 CafeId = userVM.CafeId,
             };
 
-            var result = _userManager.CreateAsync(user, userVM.Email).GetAwaiter().GetResult();
+            var result = _userManager.CreateAsync(user, "Cafe@123").GetAwaiter().GetResult();
 
             if (result.Succeeded)
             {
-                var appUser = _unitOfWork.ApplicationUser.GetAsync(u => u.Email == "Mink@gmail.com").GetAwaiter().GetResult();
+                var appUser = _unitOfWork.ApplicationUser.GetAsync(u => u.Email == userVM.Email).GetAwaiter().GetResult();
                 if (appUser != null)
                 {
                     _userManager.AddToRoleAsync(appUser, userVM.Role).GetAwaiter().GetResult();
@@ -156,6 +160,9 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
 
             var result = await _userManager.UpdateAsync(user);
             _userManager.AddToRoleAsync(user, vm.Role).GetAwaiter().GetResult();
+
+
+
             if (result.Succeeded)
             {
                 return RedirectToAction(nameof(List));
@@ -187,6 +194,42 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
 
             return View();
 
+        }
+
+        [HttpGet]
+        public IActionResult PassChange()
+        {
+            return View();
+        }
+
+
+        public async Task<IActionResult> PassChange(PassChangeVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                await _signInManager.RefreshSignInAsync(user);
+                TempData["Success"] = "Your password has been changed.";
+                return RedirectToAction("List");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View(model);
         }
 
         [HttpDelete("/admin/user/delete/{id}")]

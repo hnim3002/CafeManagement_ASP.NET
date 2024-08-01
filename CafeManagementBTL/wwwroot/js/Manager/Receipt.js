@@ -9,30 +9,28 @@
 
 function loadData() {
 
-    var table = $('#tblUser').DataTable({
+    var table = $('#tblReceipt').DataTable({
         destroy: true,  // Ensure any existing table is destroyed before reinitializing
         ajax: {
-            url: '/admin/user/getalluser',
+            url: '/manager/Receipt/GetAllReceipts',
         },
         columns: [
             { data: 'id' },
-            { data: 'fullName' },
-            { data: 'phoneNumber' },
-            { data: 'role' },
-            { data: 'address' },
-            { data: 'dateOfBirth' },
+            { data: 'date' },
+            { data: 'employeeId' },
             { data: 'cafe.name' },
+            { data: 'total' },
+            { data: 'discount' },
+            { data: 'tax' },
+            { data: 'finalTotal' },
             {
                 data: null,
                 render: function (data, type, row) {
 
                     return `
                         <div class="d-flex">
-                            <a href="/admin/user/edit/${row.id}" class="btn btn-primary">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-                            <a href="/admin/user/passchange" class="btn btn-secondary">
-                                Change Password
+                            <a href="/manager/Receipt/Detail/${row.id}" class="btn btn-primary">
+                                Detail
                             </a>
                             <button class="btn btn-danger btn-delete" data-id="${row.id}">
                                 <i class="bi bi-x-lg"></i>
@@ -46,19 +44,19 @@ function loadData() {
     });
     $('#roleFilter').on('change', function () {
         var selectedRole = $(this).val();
-        table.column(3).search(selectedRole).draw(); 
+        table.column(3).search(selectedRole).draw();
     });
 
-    $('#tblUser tbody').on('click', '.btn-delete', function () {
+    $('#tblReceipt tbody').on('click', '.btn-delete', function () {
         var userId = $(this).data('id');
         console.log(userId)
         if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
             $.ajax({
-                url: `/admin/user/delete/${userId}`,
+                url: `/manager/receipt/delete/${userId}`,
                 type: 'DELETE',
                 success: function (data) {
                     if (data.success) {
-                        var row = $(`#tblUser tbody .btn-delete[data-id="${userId}"]`).closest('tr');
+                        var row = $(`#tblReceipt tbody .btn-delete[data-id="${userId}"]`).closest('tr');
                         table.row(row).remove().draw();
                     } else {
                         console.error('Error:', data.message);

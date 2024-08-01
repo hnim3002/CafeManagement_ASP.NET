@@ -1,4 +1,8 @@
-﻿
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
 
 @model CafeManagement.Models.ViewModel.ReceiptDetailVM
 
@@ -49,26 +53,17 @@
                     <input asp-for="Receipt.Id" class="form-control" />
                     <span asp-validation-for="Receipt.Id" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Receipt.EmployeeId" class="control-label">Employee Id</label>
+                    <input asp-for="Receipt.EmployeeId" class="form-control" />
+                    <span asp-validation-for="Receipt.EmployeeId" class="text-danger"></span>
+                </div>
                 <div class="mb-3 row p-1">
                     <label asp-for="Receipt.Cafe.Name" class="control-label"></label>
                     <input asp-for="Receipt.Cafe.Name" class="form-control" />
                     <span asp-validation-for="Receipt.Cafe.Name" class="text-danger"></span>
                 </div>
-                <input hidden asp-for="Receipt.Cafe.Id" class="form-control" />
-                <div class="mb-3 row p-1">
-                    <label asp-for="Quantity" class="control-label"></label>
-                    <input type="number" asp-for="Quantity" class="form-control" />
-                    <span asp-validation-for="Quantity" class="text-danger"></span>
-                </div>
-                <div class="mb-3 row p-1">
-                    <label for="">Cafe</label>
-                    <select type="text" asp-items="@Model.InventoryList" class="form-select" asp-for="@Model.ProductId">
-                        <option disabled selected>--Select product--</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
+
             </div>
         </form>
     </div>

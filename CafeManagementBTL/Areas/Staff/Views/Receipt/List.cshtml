@@ -1,4 +1,5 @@
-﻿@model IEnumerable<CafeManagement.Models.Entities.Category>
+﻿
+@model IEnumerable<CafeManagement.Models.Entities.Cafe>
 
 @{
     ViewData["Title"] = "List";
@@ -12,17 +13,24 @@
         </div>
         <div class="col-6 text-end">
             <a asp-action="Create" class="btn btn-primary">
-                <i class="bi bi-plus-circle-fill"></i> Create New Category
+                <i class="bi bi-plus-circle-fill"></i> Create New Receipt
             </a>
         </div>
     </div>
 </div>
 
-<table id="tblCategory" class="table table-bordered table-striped">
+<table id="tblReceipt" class="table table-bordered table-striped">
     <thead>
         <tr>
             <td>Id</td>
-            <td>Name</td>
+            <td>Date</td>
+            <td>EmployeeId</td>
+            <td>Cafe</td>
+            <td>total</td>
+            <td>Discount</td>
+            <td>Tax</td>
+            <td>FinalTotal</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -30,5 +38,5 @@
 </table>
 
 @section Scripts {
-    <script src="~/js/Admin/category.js"></script>
+    <script src="~/js/staff/Receipt.js"></script>
 }

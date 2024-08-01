@@ -1,0 +1,56 @@
+﻿@model List<CafeManagement.Models.ViewModel.UserVM>
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">User</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle-fill"></i> Create New User
+            </a>
+        </div>
+    </div>
+
+    <div class="row pt-4">
+        <div class="col-12">
+            <label for="roleFilter" class="form-label">Filter by Role:</label>
+            <select id="roleFilter" class="form-select">
+                <option value="">All</option>
+                <option value="Manager">Manager</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row pt-4">
+        <div class="col-12">
+            <table id="tblUser" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Role</th>
+                        <th>Address</th>
+                        <th>Date Of Birth</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/staff/user.js"></script>
+}
