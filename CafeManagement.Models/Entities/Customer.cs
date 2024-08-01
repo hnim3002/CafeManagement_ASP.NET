@@ -14,9 +14,6 @@ namespace CafeManagement.Models.Entities
         public string? Name { get; set; }
         [Required]
         public string PhoneNumber { get; set; } = string.Empty;
-
         public string? Email { get; set; }
-
-        public ICollection<Receipt> Receipts { get; set; }
     }
 }

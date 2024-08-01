@@ -51,6 +51,93 @@ namespace CafeManagementBTL.Controllers
             return Forbid();
         }
 
+        public IActionResult Customer()
+        {
+            if (User.IsInRole(WebRoles.Web_Admin))
+            {
+                return RedirectToAction("ListCustomer", "Customer", new { area = "Admin" });
+            }
+            if (User.IsInRole(WebRoles.Web_Manager))
+            {
+                return RedirectToAction("ListCustomer", "Customer", new { area = "Manager" });
+            }
+            if (User.IsInRole(WebRoles.Web_Staff))
+            {
+                return RedirectToAction("ListCustomer", "Customer", new { area = "Staff" });
+            }
+            return Forbid();
+        }
+
+        public IActionResult Category()
+        {
+            if (User.IsInRole(WebRoles.Web_Admin))
+            {
+                return RedirectToAction("List", "Category", new { area = "Admin" });
+            }
+            if (User.IsInRole(WebRoles.Web_Manager))
+            {
+                return RedirectToAction("List", "Category", new { area = "Manager" });
+            }
+            if (User.IsInRole(WebRoles.Web_Staff))
+            {
+                return RedirectToAction("List", "Category", new { area = "Staff" });
+            }
+            return Forbid();
+        }
+
+        public IActionResult Product()
+        {
+            if (User.IsInRole(WebRoles.Web_Admin))
+            {
+                return RedirectToAction("List", "Product", new { area = "Admin" });
+            }
+            if (User.IsInRole(WebRoles.Web_Manager))
+            {
+                return RedirectToAction("List", "Product", new { area = "Manager" });
+            }
+            if (User.IsInRole(WebRoles.Web_Staff))
+            {
+                return RedirectToAction("List", "Product", new { area = "Staff" });
+            }
+            return Forbid();
+        }
+
+        public IActionResult Inventory()
+        {
+            if (User.IsInRole(WebRoles.Web_Admin))
+            {
+                return RedirectToAction("List", "Inventory", new { area = "Admin" });
+            }
+            if (User.IsInRole(WebRoles.Web_Manager))
+            {
+                return RedirectToAction("List", "Inventory", new { area = "Manager" });
+            }
+            if (User.IsInRole(WebRoles.Web_Staff))
+            {
+                return RedirectToAction("List", "Inventory", new { area = "Staff" });
+            }
+            return Forbid();
+        }
+
+
+        public IActionResult Receipt()
+        {
+            if (User.IsInRole(WebRoles.Web_Admin))
+            {
+                return RedirectToAction("List", "Receipt", new { area = "Admin" });
+            }
+            if (User.IsInRole(WebRoles.Web_Manager))
+            {
+                return RedirectToAction("List", "Receipt", new { area = "Manager" });
+            }
+            if (User.IsInRole(WebRoles.Web_Staff))
+            {
+                return RedirectToAction("List", "Receipt", new { area = "Staff" });
+            }
+            return Forbid();
+        }
+
+
 
         public IActionResult Privacy()
         {

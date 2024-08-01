@@ -55,7 +55,8 @@ namespace CafeManagement.DataAccess.Data
                 .WithMany() // Specify the navigation property in Inventory if there is one
                 .HasForeignKey(rd => new { rd.ProductId, rd.CafeId });
 
-            // Configure the relationship between ReceiptDetail and Receipt
+            // vxcznship between ReceiptDetail and Receipt
+
             modelBuilder.Entity<ReceiptDetail>()
                 .HasOne(rd => rd.Receipt)
                 .WithMany(r => r.ReceiptDetails) // Assuming Receipt has a collection of ReceiptDetails
@@ -67,6 +68,56 @@ namespace CafeManagement.DataAccess.Data
                .WithMany(r => r.ReceiptDetails)
                .HasForeignKey(rd => rd.ReceiptId)
                .OnDelete(DeleteBehavior.Restrict); // Prevent
+
+
+            // Configure relationships WorkSchedules
+
+            modelBuilder.Entity<WorkSchedules>()
+                 .HasKey(rd => new { rd.Id, rd.CafeId, rd.EmployeeId });
+
+
+            modelBuilder.Entity<WorkSchedules>()
+                .HasOne(rd => rd.Employee)
+                .WithMany(r => r.WorkSchedules)
+                .HasForeignKey(rd => rd.EmployeeId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
+
+        public override int SaveChanges()
+        {
+            // Get the entries that are being added or modified
+            var addedOrModifiedReceiptDetails = ChangeTracker.Entries<ReceiptDetail>()
+                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified)
+                .ToList();
+
+            // Iterate through each modified receipt detail
+            foreach (var entry in addedOrModifiedReceiptDetails)
+            {
+                var receiptDetail = entry.Entity;
+
+                // Fetch the related receipt
+                var receipt = Receipts
+                    .Include(r => r.ReceiptDetails)
+                    .FirstOrDefault(r => r.Id == receiptDetail.ReceiptId);
+
+                if (receipt != null)
+                {
+                    // Calculate the total from all ReceiptDetails related to this receipt
+                    receipt.Total = receipt.ReceiptDetails.Sum(rd => rd.Quantity *
+                        Inventories.FirstOrDefault(inv => inv.ProductId == rd.ProductId && inv.CafeId == rd.CafeId)?.Price ?? 0);
+
+                    // Update Discount, Tax, and FinalTotal based on your business logic
+                    receipt.Discount = receipt.Total * 0.1; // Example 10% discount
+                    receipt.Tax = (receipt.Total - receipt.Discount) * 0.15; // Example 15% tax
+                    receipt.FinalTotal = (receipt.Total - receipt.Discount) + receipt.Tax;
+
+                    // Mark the receipt as modified to update the values in the database
+                    Entry(receipt).State = EntityState.Modified;
+                }
+            }
+
+            return base.SaveChanges();
         }
 
     }

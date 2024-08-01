@@ -17,8 +17,8 @@ namespace CafeManagement.Web.Areas.Admin.Controllers
     public class InventoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<ProductController> _logger;
-        public InventoryController(IUnitOfWork unitOfWork, ILogger<ProductController> logger)
+        private readonly ILogger<InventoryController> _logger;
+        public InventoryController(IUnitOfWork unitOfWork, ILogger<InventoryController> logger)
         {
             _unitOfWork = unitOfWork;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));

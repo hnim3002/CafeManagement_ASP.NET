@@ -43,6 +43,8 @@ namespace CafeManagement.Models.ViewModel
         [Phone]
         public string PhoneNumber { get; set; }
 
+
+
         [ValidateNever]
         public IEnumerable<SelectListItem> CafeList { get; set; }
         [ValidateNever]

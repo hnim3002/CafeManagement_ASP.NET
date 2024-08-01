@@ -15,11 +15,13 @@ namespace CafeManagement.Models.Entities
 
         public Guid CafeId { get; set; }
 
-        // Other properties specific to Inventory
         public int Quantity { get; set; }
 
-        // Navigation properties
+        [Required]
+        public double Price { get; set; }
+
         public Product Product { get; set; }
+
         public Cafe Cafe { get; set; }
     }
 }

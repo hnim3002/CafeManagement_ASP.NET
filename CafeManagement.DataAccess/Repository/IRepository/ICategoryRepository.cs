@@ -2,8 +2,8 @@
 
 namespace CafeManagement.DataAccess.Repository.IRepository
 {
-    public interface ICategoryRepository
+    public interface ICategoryRepository : IRepository<Category>
     {
-        void Update(Cafe obj);
+        void Update(Category obj);
     }
 }

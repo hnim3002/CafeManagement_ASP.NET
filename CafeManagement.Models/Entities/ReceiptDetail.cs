@@ -17,11 +17,8 @@ namespace CafeManagement.Models.Entities
 
         public Guid CafeId { get; set; }
 
-
-        // Other properties specific to ReceiptDetail
         public int Quantity { get; set; }
 
-        // Navigation properties
         public Receipt Receipt { get; set; }
         public Inventory Inventory { get; set; }
     }

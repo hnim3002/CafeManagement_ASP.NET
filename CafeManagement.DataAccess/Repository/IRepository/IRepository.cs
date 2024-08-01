@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using CafeManagement.Models.Entities;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,6 @@ namespace CafeManagement.DataAccess.Repository.IRepository
         void Delete(T entity);
         Task<T> DeleteAsync(T entity);
         void RemoveRange(IEnumerable<T> entities);
+        //void Update(Customer obj);
     }
 }

@@ -1,0 +1,107 @@
+﻿
+
+@model CafeManagement.Models.ViewModel.ReceiptDetailVM
+
+<h1>Create</h1>
+
+<h4>Receipt Detail</h4>
+<hr />
+<div class="row">
+    <!-- First Column -->
+    <div class="col-md-6">
+        <form asp-action="CreateDetail" method="post">
+            <div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <!-- Discount Field -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="Receipt.Discount" class="control-label"></label>
+                            <input asp-for="Receipt.Discount" class="form-control" />
+                            <span asp-validation-for="Receipt.Discount" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- Tax Field -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="Receipt.Tax" class="control-label"></label>
+                            <input asp-for="Receipt.Tax" class="form-control" />
+                            <span asp-validation-for="Receipt.Tax" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="Receipt.Total" class="control-label"></label>
+                            <input asp-for="Receipt.Total" class="form-control" />
+                            <span asp-validation-for="Receipt.Total" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="Receipt.FinalTotal" class="control-label"></label>
+                            <input asp-for="Receipt.FinalTotal" class="form-control" />
+                            <span asp-validation-for="Receipt.FinalTotal" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Receipt.Id" class="control-label"></label>
+                    <input asp-for="Receipt.Id" class="form-control" />
+                    <span asp-validation-for="Receipt.Id" class="text-danger"></span>
+                </div>
+                <div class="mb-3 row p-1">
+                    <label asp-for="Receipt.Cafe.Name" class="control-label"></label>
+                    <input asp-for="Receipt.Cafe.Name" class="form-control" />
+                    <span asp-validation-for="Receipt.Cafe.Name" class="text-danger"></span>
+                </div>
+                <input hidden asp-for="Receipt.Cafe.Id" class="form-control" />
+                <div class="mb-3 row p-1">
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input type="number" asp-for="Quantity" class="form-control" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="mb-3 row p-1">
+                    <label for="">Cafe</label>
+                    <select type="text" asp-items="@Model.InventoryList" class="form-select" asp-for="@Model.ProductId">
+                        <option disabled selected>--Select product--</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Second Column -->
+    <div class="col-md-6">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ProductId</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var detail in Model.Receipt.ReceiptDetails)
+                {
+                    <tr>
+                        <td>@detail.ProductId</td>
+                        <td>@detail.Quantity</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="List">Back to List</a>
+</div>
+
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
